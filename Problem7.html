@@ -25,34 +25,49 @@
             let table = document.createElement('table');
             let thead = document.createElement('thead');
             let tbody = document.createElement('tbody');
+            table.style.border = '1px solid lightgray';
+            table.style.borderSpacing = '0px';
+            thead.style.backgroundColor = '#f2f2f2';
 
-            // Create table headers
-            let headers = ['ID', 'Email', 'Username', 'Password', 'First Name', 'Last Name', 'Phone'];
+            let headers = ['Email', 'Username', 'Password', 'First Name', 'Last Name', 'Phone', 'Address'];
             let headerRow = document.createElement('tr');
             headers.forEach(header => {
                 let th = document.createElement('th');
                 th.textContent = header;
+                th.style.border = '1px solid lightgray';
+                th.style.padding = '5px';
                 headerRow.appendChild(th);
             });
             thead.appendChild(headerRow);
             table.appendChild(thead);
 
-            data.slice(0, 10).forEach(item => {
+            data.slice().forEach(item => {
                 let row = document.createElement('tr');
                 let cells = [
-                    item.id,
                     item.email,
                     item.username,
-                    '.'.repeat(item.password.length),
                     item.name.firstname,
                     item.name.lastname,
-                    item.phone
+                    item.phone,
+                    `${item.address.number}-${item.address.street}-${item.address.city}`
                 ];
                 cells.forEach(cell => {
                     let td = document.createElement('td');
+                    td.style.border = '1px solid lightgray';
+                    td.style.padding = '5px';
                     td.textContent = cell;
                     row.appendChild(td);
                 });
+                let passwordInput = document.createElement('input');
+                passwordInput.type = 'password';
+                passwordInput.value = item.password;
+                passwordInput.style.border = '1px solid lightgray';
+                let passwordCell = document.createElement('td');
+                passwordCell.style.border = '1px solid lightgray';
+                passwordCell.style.padding = '5px';
+                passwordCell.appendChild(passwordInput);
+                row.insertBefore(passwordCell, row.children[2]);
+
                 tbody.appendChild(row);
             });
             table.appendChild(tbody);
