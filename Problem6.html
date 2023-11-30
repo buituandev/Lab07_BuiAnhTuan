@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration form</title>
+</head>
+
+<body>
+    <form name="registration" method="post" action="">
+        <table border="1">
+            <tr>
+                <th><label>Full name*</label></th>
+                <td class="name">
+                    <input type="text" name="fullname" id="name" placeholder="Name" style="width: 500px;">
+                </td>
+            </tr>
+            <tr>
+                <th><label>Email*</label></th>
+                <td class="email"><input type="email" name="email" id="email" placeholder="Mail" style="width: 500px;">
+                </td>
+            </tr>
+            <tr>
+                <th><label>Password*</label></th>
+                <td class="password">
+                    <input type="password" placeholder="Password" id="password" style="width: 500px;">
+                </td>
+            </tr>
+            <tr>
+                <th><label>Confirm Passwod*</label></th>
+                <td class="confirm_password"><input type="password" placeholder="Confirm Password" id="confirm_password"
+                        style="width: 500px">
+                </td>
+            </tr>
+            <tr>
+                <th><label>Phone number*</label></th>
+                <td class="phonenumber"><input type="tel" name="phonenumber" id="phonenumber" placeholder="0123456789"
+                        pattern="[0-9]{10}" style="width: 500px;"></td>
+            </tr>
+            <tr>
+                <th><label>Address</label></th>
+                <td><textarea name="address" id="address" cols="35" rows="3" placeholder="TDM, Binh Duong"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <th><label>City</label></th>
+                <td>
+                    <input type="text" name="country" id="country" placeholder="Enter your city">
+                    <label for="State"><b>State</b></label>
+                    <input type="text" name="state" id="state" placeholder="Enter your state">
+                </td>
+            </tr>
+            <tr>
+                <th><label>Zip/Postal Code</label></th>
+                <td><input type="text" name="Zip/Postal" id="Zip/Postal" placeholder="Enter your Zip/Postal Code"
+                        style="width: 500px;"></td>
+            </tr>
+            <tr>
+                <th><label>Country</label></th>
+                <td>
+                    <select name="Country" id="country">
+                        <option value="Value1" selected="selected">Select your Country</option>
+                        <option value="Value2">Vietnam</option>
+                        <option value="Value3">USA</option>
+                        <option value="Value4">UK</option>
+                        <option value="Value5">Japan</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th><label>Birthday</label></th>
+                <td>
+                    <input type="date" name="birthday" id="birthday">
+            </tr>
+            <tr>
+                <th><label>Gender</label></th>
+                <td>
+                    <select name="gender" id="gender">
+                        <option value="value2.1">Male</option>
+                        <option value="value2.2">Female</option>
+                        <option value="value2.3">Other</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th><label>Starting date</label></th>
+                <td>
+                    <input type="radio" name="Season" id="spring">
+                    <label for="Season">Spring</label>
+                    <input type="radio" name="Season" id="summer">
+                    <label for="Season">Summer</label>
+                </td>
+            </tr>
+            <tr>
+                <th><label>Comments</label></th>
+                <td>
+                    <textarea name="comment" id="comment" cols="35" rows="5"
+                        placeholder="Please send us information"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <center><button type="button"
+                            onclick="validate('name','email','password','confirm_password','phonenumber')">Submit</button>
+                    </center>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <script>
+        function validate() {
+            let form = document.forms['registration'];
+            let allValid = true;
+
+            for (args of arguments) {
+                let checkInput = document.getElementById(args);
+                let col = document.getElementsByClassName(args)[0];
+                let message = col.getElementsByClassName('error-message')[0];
+
+                if (message) {
+                    col.removeChild(message);
+                }
+
+                message = document.createElement('div');
+                message.className = 'error-message';
+
+                if (args != 'password' && args != 'confirm_password') {
+                    if (!checkInput.value) {
+                        allValid = false;
+                        message.innerHTML = 'Please enter your ' + args;
+                        message.style.color = 'red';
+                        col.appendChild(message);
+                    }
+                }
+                if (args == 'password') {
+                    if (checkInput.value.length < 6) {
+                        allValid = false;
+                        message.innerHTML = 'Please input your pass word (min-length: 6)';
+                        message.style.color = 'red';
+                        col.appendChild(message);
+                    }
+                }
+
+                if (args == 'confirm_password') {
+                    if (checkInput.value != document.getElementById('password').value) {
+                        allValid = false;
+                        message.innerHTML = 'It does not match your password.';
+                        message.style.color = 'red';
+                        col.appendChild(message);
+                    }
+                }
+            }
+
+            if (allValid) {
+                form.submit();
+            }
+        }
+    </script>
+</body>
+
+</html>

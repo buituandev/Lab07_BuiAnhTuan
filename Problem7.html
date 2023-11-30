@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+</head>
+
+<body>
+    <script>
+        window.onload = function () {
+            GetData();
+        }
+        async function GetData() {
+            var url = 'https://fakestoreapi.com/users';
+            var data;
+            await fetch(url)
+                .then(res => res.json())
+                .then(json => data = json);
+            console.log(data);
+            RenderItem(data);
+        }
+        function RenderItem(data) {
+            let table = document.createElement('table');
+            let thead = document.createElement('thead');
+            let tbody = document.createElement('tbody');
+
+            // Create table headers
+            let headers = ['ID', 'Email', 'Username', 'Password', 'First Name', 'Last Name', 'Phone'];
+            let headerRow = document.createElement('tr');
+            headers.forEach(header => {
+                let th = document.createElement('th');
+                th.textContent = header;
+                headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+
+            data.slice(0, 10).forEach(item => {
+                let row = document.createElement('tr');
+                let cells = [
+                    item.id,
+                    item.email,
+                    item.username,
+                    '.'.repeat(item.password.length),
+                    item.name.firstname,
+                    item.name.lastname,
+                    item.phone
+                ];
+                cells.forEach(cell => {
+                    let td = document.createElement('td');
+                    td.textContent = cell;
+                    row.appendChild(td);
+                });
+                tbody.appendChild(row);
+            });
+            table.appendChild(tbody);
+
+            document.body.appendChild(table);
+        }
+    </script>
+</body>
+
+</html>

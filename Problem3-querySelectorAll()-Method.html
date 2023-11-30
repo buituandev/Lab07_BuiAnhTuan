@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>querySelectorAll()Method</title>
+</head>
+
+<body>
+    <div>
+        <p class="example">This is the first paragraph with class "example".</p>
+        <p class="example">Another paragraph with class "example".</p>
+        <p>This is a regular paragraph.</p>
+    </div>
+
+    <p>
+        <a href="">Link with target attribute</a>
+    
+    <p> <a href="">Another link with target attribute</a></p>
+
+    <p>
+    <h1 class="title">Title 1</h1>
+    <h2 class="title">Title 2</h2>
+    </p>
+
+    <p><button onclick="change()">Change</button></p>
+
+    <style>
+        .example {
+            background-color: #a9d8e5;
+            border: 1px solid black;
+            margin: 10px 0 10px 0;
+            padding: 10px;
+        }
+
+        h1,
+        h2 {
+            color: #83007d;
+        }
+    </style>
+
+    <script>
+        function change() {
+            let p = document.querySelectorAll('p.example');
+            for (let i = 0; i < p.length; i++) {
+                p[i].style.border = '1px solid green';
+                p[i].style.margin = '5px 0 5px 20px';
+                p[i].style.padding = '5px';
+            }
+            p[0].style.backgroundColor = 'yellow';
+
+            let links = document.querySelectorAll('a');
+            for (let i = 0; i < links.length; i++) {
+                links[i].style.border = '1px solid red';
+                links[i].style.textDecoration = 'none';
+            }
+           let titles = document.querySelectorAll('.title');
+            for (let i = 0; i < titles.length; i++) {
+                titles[i].style.color = '#ffa433';
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuerySelector()-Method</title>
+</head>
+
+<body>
+    <div>
+        <p class="example" style="color: #11892f; background-color: #a9d8e5;">This is the first paragraph with class "example".</p>
+        <p>This is another paragraph.</p>
+    </div>
+
+    <p><a href="">Link with target attribute</a></p>
+    <p><button onclick="changing()">Change</button></p>
+
+    <script>
+        function changing() {
+            let div = document.querySelector('div');
+            let p = div.querySelector('p.example');
+            p.style.color = 'blue';
+            p.style.backgroundColor = 'yellow';
+
+            let link = document.querySelector('a');
+            link.style.border = '1px solid red';
+        }
+    </script>
+</body>
+
+</html>
